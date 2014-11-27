@@ -1,4 +1,4 @@
 insertion-sort-c
 ================
 
-C test application
+C complier test application
