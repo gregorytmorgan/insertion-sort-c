@@ -20,9 +20,9 @@ char **readFile(char *fname) {
 	FILE *fp;
 	char name[MAX_NAME_LENGTH + 1];
 	char **names = (char **)malloc(sizeof(char *) * MAX_NAMES);
-	int nNames = 0;
+	int idxNames = 0;
 	int i;
-	
+
 	// initialize the names array
 	for (i = 0; i < MAX_NAMES; i++) {
 		names[i] = 0;
@@ -39,21 +39,18 @@ char **readFile(char *fname) {
 	
 	snprintf(INPUT_FORMAT, sizeof(INPUT_FORMAT), "%%%ds", MAX_NAMES);
 	
-	i = 0;
-	while (!feof(fp) && nNames < MAX_NAMES) {
+	idxNames = 0;
+	while (!feof(fp) && idxNames < MAX_NAMES) {
+		
 	  if (fscanf(fp, INPUT_FORMAT, name) != 1) { // 15 + null term, 
 		break;
 	  }
 	  
 	  // white space / trim ????
-	  names[i] = strdup(name);
-	  
-	  //printf("name: %s\n", names[i]);
-	  i++;
-	  nNames++;
+	  names[idxNames++] = strdup(name);
 	}	
 	
-	printf("Read %d names.\n", nNames);
+	printf("Read %d names.\n", idxNames);
 
 	fclose(fp);
 
